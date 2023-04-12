@@ -111,6 +111,11 @@ func loadCustomLogo(logoPath string) (string, error) {
 		// Return img tag pointing to the URL.
 		return fmt.Sprintf("<img src=\"%s\" alt=\"Logo\" />", logoPath), nil
 	}
+	
+	if strings.HasPrefix(logoPath, "data:image/") {
+		// Return img tag with provided base64 data source.
+		return fmt.Sprintf("<img src=\"%s\" alt=\"Logo\" />", logoPath), nil
+	}
 
 	logoData, err := os.ReadFile(logoPath)
 	if err != nil {
